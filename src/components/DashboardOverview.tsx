@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
 import { 
   AlertTriangle, 
   CheckCircle, 
@@ -9,6 +10,17 @@ import {
   TrendingUp,
   MapPin
 } from "lucide-react";
+
+interface DashboardOverviewProps {
+  activeView: string;
+  setActiveView: (view: any) => void;
+  categoryItems: Array<{
+    id: string;
+    title: string;
+    icon: any;
+    count: number;
+  }>;
+}
 
 interface StatCardProps {
   title: string;
@@ -57,7 +69,7 @@ const categoryStats = [
   { name: 'Graffiti', current: 15, total: 35, color: 'status-resolved' },
 ];
 
-export function DashboardOverview() {
+export function DashboardOverview({ activeView, setActiveView, categoryItems }: DashboardOverviewProps) {
   return (
     <div className="space-y-6">
       {/* Stats Cards */}
@@ -89,6 +101,34 @@ export function DashboardOverview() {
           color="primary"
         />
       </div>
+
+      {/* Categories Section */}
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <AlertTriangle className="h-5 w-5 text-primary" />
+            Issue Categories
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            {categoryItems.map((item) => (
+              <Button
+                key={item.id}
+                variant={activeView === item.id ? "default" : "outline"}
+                onClick={() => setActiveView(item.id)}
+                className="flex flex-col items-center gap-2 h-20 p-3"
+              >
+                <item.icon className="h-5 w-5" />
+                <div className="text-center">
+                  <div className="text-xs font-medium">{item.title}</div>
+                  <div className="text-xs text-muted-foreground">{item.count} issues</div>
+                </div>
+              </Button>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Issues */}

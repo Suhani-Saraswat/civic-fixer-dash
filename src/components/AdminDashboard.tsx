@@ -41,11 +41,11 @@ export function AdminDashboard() {
   const renderActiveView = () => {
     switch (activeView) {
       case 'overview':
-        return <DashboardOverview />;
+        return <DashboardOverview activeView={activeView} setActiveView={setActiveView} categoryItems={categoryItems} />;
       case 'issues':
         return <IssuesManager />;
       default:
-        return <DashboardOverview />;
+        return <DashboardOverview activeView={activeView} setActiveView={setActiveView} categoryItems={categoryItems} />;
     }
   };
 
@@ -58,7 +58,7 @@ export function AdminDashboard() {
           </h1>
           
           {/* Main Navigation */}
-          <div className="flex items-center gap-1 mb-4">
+          <div className="flex items-center gap-1">
             {mainNavItems.map((item) => (
               <Button
                 key={item.id}
@@ -69,26 +69,6 @@ export function AdminDashboard() {
               >
                 <item.icon className="h-4 w-4" />
                 {item.title}
-              </Button>
-            ))}
-          </div>
-          
-          {/* Categories Navigation */}
-          <div className="flex flex-wrap items-center gap-1">
-            <span className="text-sm text-muted-foreground mr-2 font-medium">Categories:</span>
-            {categoryItems.map((item) => (
-              <Button
-                key={item.id}
-                variant={activeView === item.id ? "default" : "outline"}
-                size="sm"
-                onClick={() => setActiveView(item.id)}
-                className="flex items-center gap-2 h-8"
-              >
-                <item.icon className="h-3 w-3" />
-                <span className="text-xs">{item.title}</span>
-                <span className="bg-primary/10 text-primary text-xs px-1.5 py-0.5 rounded-full ml-1">
-                  {item.count}
-                </span>
               </Button>
             ))}
           </div>
