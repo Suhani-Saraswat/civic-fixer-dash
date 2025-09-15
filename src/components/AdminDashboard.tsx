@@ -43,7 +43,7 @@ export function AdminDashboard() {
                 <Menu className="h-5 w-5" />
               </Button>
               <h1 className="text-xl font-semibold text-foreground">
-                Municipal Issues Dashboard
+                Admin Dashboard
               </h1>
             </div>
           </header>
