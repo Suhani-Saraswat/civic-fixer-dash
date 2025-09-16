@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { DashboardOverview } from "./DashboardOverview";
 import { IssuesManager } from "./IssuesManager";
+import { ReportsManager } from "./ReportsManager";
 import { Button } from "@/components/ui/button";
 import { 
   LayoutDashboard, 
@@ -44,6 +45,8 @@ export function AdminDashboard() {
         return <DashboardOverview activeView={activeView} setActiveView={setActiveView} categoryItems={categoryItems} />;
       case 'issues':
         return <IssuesManager />;
+      case 'reports':
+        return <ReportsManager />;
       default:
         return <DashboardOverview activeView={activeView} setActiveView={setActiveView} categoryItems={categoryItems} />;
     }
